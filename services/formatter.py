@@ -23,23 +23,34 @@ def _put_rows(puts: list[PutOption]) -> str:
     return header + divider + rows
 
 
-def format_result(result: OptionsResult) -> str:
+def _chunk(text: str) -> list[str]:
+    """Split a block of text into MAX_LENGTH chunks at newline boundaries."""
+    if len(text) <= MAX_LENGTH:
+        return [text]
+    chunks, current = [], ""
+    for line in text.splitlines(keepends=True):
+        if len(current) + len(line) > MAX_LENGTH:
+            chunks.append(current)
+            current = line
+        else:
+            current += line
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+def format_result(result: OptionsResult) -> list[str]:
     if result.error:
-        return f"❌ **{result.ticker}** — Error: {result.error}"
+        return [f"❌ **{result.ticker}** — Error: {result.error}"]
 
     low = result.current_price * 0.70
     high = result.current_price * 0.80
-
-    msg = (
+    header = (
         f"**{result.ticker}** @ ${result.current_price:.2f}  "
-        f"_(strikes ${low:.0f}–${high:.0f})_\n\n"
-        f"**Current Week:**\n"
-        f"```\n{_put_rows(result.current_week)}```\n"
-        f"**Next Week:**\n"
-        f"```\n{_put_rows(result.next_week)}```"
+        f"_(strikes ${low:.0f}–${high:.0f})_"
     )
 
-    if len(msg) > MAX_LENGTH:
-        msg = msg[:MAX_LENGTH] + "\n_... truncated_"
+    current = f"{header}\n\n**Current Week:**\n```\n{_put_rows(result.current_week)}```"
+    next_w = f"**{result.ticker} — Next Week:**\n```\n{_put_rows(result.next_week)}```"
 
-    return msg
+    return _chunk(current) + _chunk(next_w)

@@ -11,6 +11,12 @@ premiums_group = app_commands.Group(
 )
 
 
+async def _send_result(interaction: discord.Interaction, ticker: str):
+    result = fetch_puts_for_ticker(ticker)
+    for msg in format_result(result):
+        await interaction.followup.send(msg)
+
+
 @premiums_group.command(name="fetch", description="Fetch put premiums for all watchlist stocks")
 async def premiums_fetch(interaction: discord.Interaction):
     await interaction.response.defer()
@@ -20,13 +26,11 @@ async def premiums_fetch(interaction: discord.Interaction):
         return
 
     for ticker in tickers:
-        result = fetch_puts_for_ticker(ticker)
-        await interaction.followup.send(format_result(result))
+        await _send_result(interaction, ticker)
 
 
 @premiums_group.command(name="stock", description="Fetch put premiums for a specific ticker")
 @app_commands.describe(ticker="Stock ticker symbol e.g. AAPL")
 async def premiums_stock(interaction: discord.Interaction, ticker: str):
     await interaction.response.defer()
-    result = fetch_puts_for_ticker(ticker)
-    await interaction.followup.send(format_result(result))
+    await _send_result(interaction, ticker)
