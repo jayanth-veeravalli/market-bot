@@ -14,7 +14,7 @@ premiums_group = app_commands.Group(
 @premiums_group.command(name="fetch", description="Fetch put premiums for all watchlist stocks")
 async def premiums_fetch(interaction: discord.Interaction):
     await interaction.response.defer()
-    tickers = watchlist_service.get_tickers()
+    tickers = await watchlist_service.get_tickers()
     if not tickers:
         await interaction.followup.send("Your watchlist is empty. Use `/watchlist add` first.")
         return

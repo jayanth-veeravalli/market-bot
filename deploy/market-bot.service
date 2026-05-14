@@ -1,0 +1,16 @@
+[Unit]
+Description=Market Research Discord Bot
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=market-bot
+WorkingDirectory=/opt/market-bot
+ExecStart=/opt/market-bot/.venv/bin/python main.py
+Restart=always
+RestartSec=10
+EnvironmentFile=/opt/market-bot/.env
+
+[Install]
+WantedBy=multi-user.target

@@ -1,47 +1,37 @@
-import sqlite3
-from pathlib import Path
+import os
+import psycopg
 
-DB_PATH = Path("watchlist.db")
-
-
-def _connect() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS tickers (ticker TEXT PRIMARY KEY)"
-    )
-    conn.commit()
-    return conn
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 
-def add_ticker(ticker: str) -> str:
+async def add_ticker(ticker: str) -> str:
     ticker = ticker.upper().strip()
-    with _connect() as conn:
+    async with await psycopg.AsyncConnection.connect(DATABASE_URL) as conn:
         try:
-            conn.execute("INSERT INTO tickers VALUES (?)", (ticker,))
-            conn.commit()
+            await conn.execute("INSERT INTO tickers (ticker) VALUES (%s)", (ticker,))
             return f"✅ Added **{ticker}** to the watchlist."
-        except sqlite3.IntegrityError:
+        except psycopg.errors.UniqueViolation:
             return f"**{ticker}** is already in the watchlist."
 
 
-def remove_ticker(ticker: str) -> str:
+async def remove_ticker(ticker: str) -> str:
     ticker = ticker.upper().strip()
-    with _connect() as conn:
-        cursor = conn.execute("DELETE FROM tickers WHERE ticker = ?", (ticker,))
-        conn.commit()
+    async with await psycopg.AsyncConnection.connect(DATABASE_URL) as conn:
+        cursor = await conn.execute("DELETE FROM tickers WHERE ticker = %s", (ticker,))
         if cursor.rowcount == 0:
             return f"**{ticker}** is not in the watchlist."
         return f"✅ Removed **{ticker}** from the watchlist."
 
 
-def get_tickers() -> list[str]:
-    with _connect() as conn:
-        rows = conn.execute("SELECT ticker FROM tickers ORDER BY ticker").fetchall()
+async def get_tickers() -> list[str]:
+    async with await psycopg.AsyncConnection.connect(DATABASE_URL) as conn:
+        cursor = await conn.execute("SELECT ticker FROM tickers ORDER BY ticker")
+        rows = await cursor.fetchall()
         return [row[0] for row in rows]
 
 
-def fetch_all() -> str:
-    tickers = get_tickers()
+async def fetch_all() -> str:
+    tickers = await get_tickers()
     if not tickers:
         return "Your watchlist is empty. Use `/watchlist add` to add stocks."
     lines = "\n".join(f"• {t}" for t in tickers)
