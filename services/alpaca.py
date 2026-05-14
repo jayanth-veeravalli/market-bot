@@ -69,7 +69,14 @@ def _fetch_puts(ticker: str, price: float, expiry: date) -> list[PutOption]:
             iv=iv,
         ))
 
-    return sorted(puts, key=lambda p: p.strike, reverse=True)
+    MIN_PREMIUM_RATE = 0.005  # 0.5% of collateral (strike price)
+
+    def _meets_min_premium(p: PutOption) -> bool:
+        effective_price = p.last_price if p.last_price is not None else p.midpoint
+        return effective_price >= p.strike * MIN_PREMIUM_RATE
+
+    filtered = [p for p in puts if _meets_min_premium(p)]
+    return sorted(filtered, key=lambda p: p.strike, reverse=True)
 
 
 def fetch_puts_for_ticker(ticker: str) -> OptionsResult:
