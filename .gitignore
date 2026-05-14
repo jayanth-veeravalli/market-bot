@@ -1,0 +1,5 @@
+.env
+watchlist.db
+.venv/
+__pycache__/
+*.pyc

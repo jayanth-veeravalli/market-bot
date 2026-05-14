@@ -1,0 +1,11 @@
+[project]
+name = "market-bot"
+version = "0.1.0"
+requires-python = ">=3.9"
+dependencies = [
+    "alpaca-py>=0.43.4",
+    "discord-py>=2.7.1",
+    "fastapi>=0.128.8",
+    "python-dotenv>=1.2.1",
+    "uvicorn>=0.39.0",
+]
