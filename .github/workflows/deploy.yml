@@ -20,7 +20,7 @@ jobs:
 
       - name: Write .env to VM
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "cat > /opt/market-bot/.env" << 'EOF'
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "sudo tee /opt/market-bot/.env > /dev/null" << 'EOF'
           ALPACA_API_KEY=${{ secrets.ALPACA_API_KEY }}
           ALPACA_API_SECRET=${{ secrets.ALPACA_API_SECRET }}
           ALPACA_BASE_URL=${{ secrets.ALPACA_BASE_URL }}
@@ -30,33 +30,33 @@ jobs:
 
       - name: Pull latest code
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
             cd /opt/market-bot &&
-            git pull origin main
+            sudo git pull origin main
           "
 
       - name: Install dependencies
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
             cd /opt/market-bot &&
-            uv sync
+            sudo /root/.local/bin/uv sync
           "
 
       - name: Run migrations
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
             cd /opt/market-bot &&
-            uv run alembic upgrade head
+            sudo /root/.local/bin/uv run alembic upgrade head
           "
 
       - name: Restart service
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
             sudo systemctl restart market-bot
           "
 
       - name: Verify bot is running
         run: |
-          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
             sudo systemctl is-active market-bot
           "
