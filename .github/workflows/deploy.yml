@@ -31,6 +31,7 @@ jobs:
       - name: Pull latest code
         run: |
           ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} "
+            sudo git config --global --add safe.directory /opt/market-bot &&
             cd /opt/market-bot &&
             sudo git pull origin main
           "
