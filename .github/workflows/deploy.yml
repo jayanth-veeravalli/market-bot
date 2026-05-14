@@ -1,0 +1,64 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Write SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GCP_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.GCP_VM_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Write .env to VM
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "cat > /opt/market-bot/.env" << 'EOF'
+          ALPACA_API_KEY=${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET=${{ secrets.ALPACA_API_SECRET }}
+          ALPACA_BASE_URL=${{ secrets.ALPACA_BASE_URL }}
+          DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          EOF
+
+      - name: Pull latest code
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+            cd /opt/market-bot &&
+            git pull origin main
+          "
+
+      - name: Install dependencies
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+            cd /opt/market-bot &&
+            uv sync
+          "
+
+      - name: Run migrations
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+            cd /opt/market-bot &&
+            uv run alembic upgrade head
+          "
+
+      - name: Restart service
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+            sudo systemctl restart market-bot
+          "
+
+      - name: Verify bot is running
+        run: |
+          ssh market-bot@${{ secrets.GCP_VM_HOST }} "
+            sudo systemctl is-active market-bot
+          "
