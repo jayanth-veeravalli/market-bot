@@ -3,6 +3,12 @@ set -e
 
 echo "=== Market Bot GCP Setup ==="
 
+# Wait for GCP's background apt process to finish
+while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1; do
+    echo "Waiting for apt lock..."
+    sleep 5
+done
+
 # Install system dependencies
 apt-get update -q
 apt-get install -y -q python3 python3-pip curl git
