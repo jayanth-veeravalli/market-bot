@@ -54,7 +54,6 @@ def _fetch_puts(ticker: str, price: float, expiry: date) -> list[PutOption]:
         bid = snapshot.latest_quote.bid_price if snapshot.latest_quote else 0.0
         ask = snapshot.latest_quote.ask_price if snapshot.latest_quote else 0.0
         last_price = snapshot.latest_trade.price if snapshot.latest_trade else None
-        volume = int(snapshot.day_bar.volume) if snapshot.day_bar else None
         delta = snapshot.greeks.delta if snapshot.greeks else None
         iv = snapshot.implied_volatility
 
@@ -66,7 +65,6 @@ def _fetch_puts(ticker: str, price: float, expiry: date) -> list[PutOption]:
             ask=ask,
             midpoint=round((bid + ask) / 2, 4),
             last_price=last_price,
-            volume=volume,
             delta=delta,
             iv=iv,
         ))

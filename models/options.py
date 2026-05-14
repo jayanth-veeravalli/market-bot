@@ -11,7 +11,6 @@ class PutOption(BaseModel):
     ask: float
     midpoint: float
     last_price: Optional[float] = None
-    volume: Optional[int] = None
     delta: Optional[float] = None
     iv: Optional[float] = None
 
