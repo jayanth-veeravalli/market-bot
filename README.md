@@ -13,10 +13,10 @@ A Discord bot for researching sell put premiums on watchlist stocks using the Al
 
 ## Prerequisites
 
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) — manages both Python and dependencies (no separate Python install needed)
 - [Alpaca account](https://alpaca.markets) (free, paper trading)
 - [Discord bot](https://discord.com/developers/applications) invited to your server
-- **Local only**: PostgreSQL 16 (`brew install postgresql@16`)
+- **Dev container**: [Docker Desktop](https://www.docker.com/products/docker-desktop) + VS Code with Dev Containers extension
+- **Local (manual)**: [`uv`](https://docs.astral.sh/uv/getting-started/installation/) + PostgreSQL 16 (`brew install postgresql@16`)
 - **Prod only**: [Supabase](https://supabase.com) project (free tier is sufficient)
 
 ## Environments
@@ -32,7 +32,28 @@ The bot supports two environments controlled by the `ENV` variable:
 | Command sync | Guild sync (instant) | Global sync (~1 hr) |
 | Database | Local PostgreSQL | Supabase |
 
-## Local Testing Setup
+## Dev Container Setup (Recommended)
+
+The fastest way to get started — no local Python, PostgreSQL, or PATH setup needed.
+
+**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop) + [VS Code](https://code.visualstudio.com) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+
+1. Open the repo in VS Code and click **Reopen in Container** when prompted (or run `Dev Containers: Reopen in Container` from the command palette)
+2. Wait for the container to build — `uv sync`, DB setup, and migrations run automatically
+3. Fill in your credentials in `.env.local` (created automatically from `.env.sample`):
+   ```
+   ALPACA_API_KEY=your_key
+   ALPACA_API_SECRET=your_secret
+   DISCORD_BOT_TOKEN=your_test_bot_token
+   DISCORD_GUILD_ID=your_test_server_id
+   ```
+   `DATABASE_URL` is pre-filled to point at the container's PostgreSQL — no changes needed.
+4. Run the bot:
+   ```bash
+   uv run python main.py
+   ```
+
+## Local Testing Setup (Manual)
 
 1. **Clone, install Python, and install dependencies**
    ```bash
