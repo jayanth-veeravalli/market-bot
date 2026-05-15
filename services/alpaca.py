@@ -26,7 +26,7 @@ def _parse_symbol(symbol: str) -> tuple[date, float]:
 
 
 def _next_friday(from_date: date) -> date:
-    days = (4 - from_date.weekday()) % 7 or 7
+    days = (4 - from_date.weekday()) % 7
     return from_date + timedelta(days=days)
 
 
