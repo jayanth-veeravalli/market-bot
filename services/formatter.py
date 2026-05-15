@@ -1,28 +1,26 @@
 from models.options import OptionsResult, PutOption
 
-MAX_ROWS_PER_MSG = 15  # keeps each code block well within Discord's 2000 char limit
+MAX_ROWS_PER_MSG = 15
 
 TABLE_HEADER = (
-    f"  {'Strike':>8}  {'Bid':>6}  {'Ask':>6}  {'Mid':>6}  "
-    f"{'Last':>6}  {'Delta':>6}  {'IV':>6}\n"
-    f"  " + "-" * 64 + "\n"
+    f"{'Stk':>6} {'Bid':>5} {'Ask':>5} {'Mid':>5} {'Lst':>5} {'Dlt':>5} {'IV':>4}\n"
+    f"{'─' * 41}\n"
 )
 
 
 def _format_row(p: PutOption) -> str:
-    delta_str = f"{p.delta:+.3f}" if p.delta is not None else "   N/A"
-    iv_str = f"{p.iv * 100:.1f}%" if p.iv is not None else "  N/A"
+    delta_str = f"{p.delta:+.2f}" if p.delta is not None else "  N/A"
+    iv_str = f"{p.iv * 100:.1f}%" if p.iv is not None else " N/A"
     last_str = f"{p.last_price:.2f}" if p.last_price is not None else "  N/A"
     return (
-        f"  {p.strike:>8.2f}  {p.bid:>6.2f}  {p.ask:>6.2f}  {p.midpoint:>6.3f}  "
-        f"{last_str:>6}  {delta_str:>6}  {iv_str:>6}\n"
+        f"{p.strike:>6.2f} {p.bid:>5.2f} {p.ask:>5.2f} {p.midpoint:>5.2f} "
+        f"{last_str:>5} {delta_str:>5} {iv_str:>4}\n"
     )
 
 
 def _table_messages(label: str, puts: list[PutOption]) -> list[str]:
-    """Return one or more Discord messages for a week's puts, chunked by row count."""
     if not puts:
-        return [f"**{label}**\n```\n  No contracts found in this range.\n```"]
+        return [f"**{label}**\n```\nNo contracts found in this range.\n```"]
 
     messages = []
     for i in range(0, len(puts), MAX_ROWS_PER_MSG):
