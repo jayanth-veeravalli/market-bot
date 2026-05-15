@@ -1,3 +1,5 @@
+import os
+
 import discord
 from discord import app_commands
 
@@ -26,7 +28,12 @@ class Bot(discord.Client):
             await interaction.response.send_message(msg)
 
     async def on_ready(self):
-        await self.tree.sync()
+        if os.environ.get("ENV") == "local":
+            guild = discord.Object(id=int(os.environ["DISCORD_GUILD_ID"]))
+            self.tree.copy_global_to(guild=guild)
+            await self.tree.sync(guild=guild)
+        else:
+            await self.tree.sync()
         print(f"✅ Logged in as {self.user} — slash commands synced.")
 
 
