@@ -1,0 +1,1638 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "premiums_request_flow",
+        "label": "Premiums request flow \u2014 Discord to Alpaca to Discord response",
+        "nodes": [
+          "commands_premiums_premiums_fetch",
+          "commands_premiums_send_result",
+          "services_alpaca_fetch_puts_for_ticker",
+          "services_formatter_format_result"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "commands/premiums.py"
+      },
+      {
+        "id": "watchlist_crud_flow",
+        "label": "Watchlist CRUD \u2014 command layer to psycopg DB operations",
+        "nodes": [
+          "commands_watchlist_watchlist_add",
+          "commands_watchlist_watchlist_remove",
+          "commands_watchlist_watchlist_fetch",
+          "services_watchlist_add_ticker",
+          "services_watchlist_remove_ticker",
+          "services_watchlist_get_tickers"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "commands/watchlist.py"
+      },
+      {
+        "id": "deployment_pipeline",
+        "label": "Deployment pipeline \u2014 setup, GitHub Actions, systemd service",
+        "nodes": [
+          "deploy_setup_sh",
+          "workflows_deploy_deploy_to_gcp",
+          "devcontainer_devcontainer_json"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": ".github/workflows/deploy.yml"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "bot.py",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "L1",
+      "id": "bot_py",
+      "community": 4,
+      "norm_label": "bot.py"
+    },
+    {
+      "label": "Bot",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "L10",
+      "id": "market_bot_bot_bot",
+      "community": 4,
+      "norm_label": "bot"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "L11",
+      "id": "market_bot_bot_bot_init",
+      "community": 4,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".on_ready()",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "L30",
+      "id": "market_bot_bot_bot_on_ready",
+      "community": 4,
+      "norm_label": ".on_ready()"
+    },
+    {
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "main.py",
+      "source_location": "L1",
+      "id": "main_py",
+      "community": 11,
+      "norm_label": "main.py"
+    },
+    {
+      "label": "env.py",
+      "file_type": "code",
+      "source_file": "migrations/env.py",
+      "source_location": "L1",
+      "id": "migrations_env_py",
+      "community": 7,
+      "norm_label": "env.py"
+    },
+    {
+      "label": "run_migrations_offline()",
+      "file_type": "code",
+      "source_file": "migrations/env.py",
+      "source_location": "L27",
+      "id": "migrations_env_run_migrations_offline",
+      "community": 7,
+      "norm_label": "run_migrations_offline()"
+    },
+    {
+      "label": "run_migrations_online()",
+      "file_type": "code",
+      "source_file": "migrations/env.py",
+      "source_location": "L39",
+      "id": "migrations_env_run_migrations_online",
+      "community": 7,
+      "norm_label": "run_migrations_online()"
+    },
+    {
+      "label": "333947cbfb58_create_tickers_table.py",
+      "file_type": "code",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L1",
+      "id": "migrations_versions_333947cbfb58_create_tickers_table_py",
+      "community": 8,
+      "norm_label": "333947cbfb58_create_tickers_table.py"
+    },
+    {
+      "label": "upgrade()",
+      "file_type": "code",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L21",
+      "id": "versions_333947cbfb58_create_tickers_table_upgrade",
+      "community": 8,
+      "norm_label": "upgrade()"
+    },
+    {
+      "label": "downgrade()",
+      "file_type": "code",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L30",
+      "id": "versions_333947cbfb58_create_tickers_table_downgrade",
+      "community": 8,
+      "norm_label": "downgrade()"
+    },
+    {
+      "label": "create_tickers_table  Revision ID: 333947cbfb58 Revises:  Create Date: 2026-05-1",
+      "file_type": "rationale",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L1",
+      "id": "versions_333947cbfb58_create_tickers_table_rationale_1",
+      "community": 8,
+      "norm_label": "create_tickers_table  revision id: 333947cbfb58 revises:  create date: 2026-05-1"
+    },
+    {
+      "label": "setup.sh",
+      "file_type": "code",
+      "source_file": "deploy/setup.sh",
+      "source_location": "L1",
+      "id": "deploy_setup_sh",
+      "community": 10,
+      "norm_label": "setup.sh"
+    },
+    {
+      "label": "PATH",
+      "file_type": "code",
+      "source_file": "deploy/setup.sh",
+      "source_location": "L18",
+      "id": "deploy_setup_path",
+      "community": 10,
+      "norm_label": "path"
+    },
+    {
+      "label": "settings.local.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L1",
+      "id": "claude_settings_local_json",
+      "community": 9,
+      "norm_label": "settings.local.json"
+    },
+    {
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "id": "claude_settings_local_permissions",
+      "community": 9,
+      "norm_label": "permissions"
+    },
+    {
+      "label": "allow",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "id": "claude_settings_local_permissions_allow",
+      "community": 9,
+      "norm_label": "allow"
+    },
+    {
+      "label": "options.py",
+      "file_type": "code",
+      "source_file": "models/options.py",
+      "source_location": "L1",
+      "id": "models_options_py",
+      "community": 3,
+      "norm_label": "options.py"
+    },
+    {
+      "label": "PutOption",
+      "file_type": "code",
+      "source_file": "models/options.py",
+      "source_location": "L6",
+      "id": "models_options_putoption",
+      "community": 3,
+      "norm_label": "putoption"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "basemodel",
+      "community": 3,
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "OptionsResult",
+      "file_type": "code",
+      "source_file": "models/options.py",
+      "source_location": "L18",
+      "id": "models_options_optionsresult",
+      "community": 3,
+      "norm_label": "optionsresult"
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "models/__init__.py",
+      "source_location": "L1",
+      "id": "models_init_py",
+      "community": 12,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "devcontainer.json",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L1",
+      "id": "devcontainer_devcontainer_json",
+      "community": 1,
+      "norm_label": "devcontainer.json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L2",
+      "id": "devcontainer_devcontainer_name",
+      "community": 1,
+      "norm_label": "name"
+    },
+    {
+      "label": "dockerComposeFile",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L3",
+      "id": "devcontainer_devcontainer_dockercomposefile",
+      "community": 1,
+      "norm_label": "dockercomposefile"
+    },
+    {
+      "label": "service",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L4",
+      "id": "devcontainer_devcontainer_service",
+      "community": 1,
+      "norm_label": "service"
+    },
+    {
+      "label": "workspaceFolder",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L5",
+      "id": "devcontainer_devcontainer_workspacefolder",
+      "community": 1,
+      "norm_label": "workspacefolder"
+    },
+    {
+      "label": "postCreateCommand",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L6",
+      "id": "devcontainer_devcontainer_postcreatecommand",
+      "community": 1,
+      "norm_label": "postcreatecommand"
+    },
+    {
+      "label": "remoteUser",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L7",
+      "id": "devcontainer_devcontainer_remoteuser",
+      "community": 1,
+      "norm_label": "remoteuser"
+    },
+    {
+      "label": "customizations",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L8",
+      "id": "devcontainer_devcontainer_customizations",
+      "community": 1,
+      "norm_label": "customizations"
+    },
+    {
+      "label": "vscode",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L9",
+      "id": "devcontainer_devcontainer_customizations_vscode",
+      "community": 1,
+      "norm_label": "vscode"
+    },
+    {
+      "label": "extensions",
+      "file_type": "code",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L10",
+      "id": "devcontainer_devcontainer_vscode_extensions",
+      "community": 1,
+      "norm_label": "extensions"
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "commands/__init__.py",
+      "source_location": "L1",
+      "id": "commands_init_py",
+      "community": 13,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "watchlist.py",
+      "file_type": "code",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L1",
+      "id": "commands_watchlist_py",
+      "community": 2,
+      "norm_label": "watchlist.py"
+    },
+    {
+      "label": "watchlist_fetch()",
+      "file_type": "code",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L13",
+      "id": "commands_watchlist_watchlist_fetch",
+      "community": 2,
+      "norm_label": "watchlist_fetch()"
+    },
+    {
+      "label": "watchlist_add()",
+      "file_type": "code",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L19",
+      "id": "commands_watchlist_watchlist_add",
+      "community": 2,
+      "norm_label": "watchlist_add()"
+    },
+    {
+      "label": "watchlist_remove()",
+      "file_type": "code",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L25",
+      "id": "commands_watchlist_watchlist_remove",
+      "community": 2,
+      "norm_label": "watchlist_remove()"
+    },
+    {
+      "label": "premiums.py",
+      "file_type": "code",
+      "source_file": "commands/premiums.py",
+      "source_location": "L1",
+      "id": "commands_premiums_py",
+      "community": 5,
+      "norm_label": "premiums.py"
+    },
+    {
+      "label": "_send_result()",
+      "file_type": "code",
+      "source_file": "commands/premiums.py",
+      "source_location": "L14",
+      "id": "commands_premiums_send_result",
+      "community": 5,
+      "norm_label": "_send_result()"
+    },
+    {
+      "label": "premiums_fetch()",
+      "file_type": "code",
+      "source_file": "commands/premiums.py",
+      "source_location": "L21",
+      "id": "commands_premiums_premiums_fetch",
+      "community": 5,
+      "norm_label": "premiums_fetch()"
+    },
+    {
+      "label": "premiums_stock()",
+      "file_type": "code",
+      "source_file": "commands/premiums.py",
+      "source_location": "L34",
+      "id": "commands_premiums_premiums_stock",
+      "community": 5,
+      "norm_label": "premiums_stock()"
+    },
+    {
+      "label": "formatter.py",
+      "file_type": "code",
+      "source_file": "services/formatter.py",
+      "source_location": "L1",
+      "id": "services_formatter_py",
+      "community": 3,
+      "norm_label": "formatter.py"
+    },
+    {
+      "label": "_format_row()",
+      "file_type": "code",
+      "source_file": "services/formatter.py",
+      "source_location": "L11",
+      "id": "services_formatter_format_row",
+      "community": 3,
+      "norm_label": "_format_row()"
+    },
+    {
+      "label": "_table_messages()",
+      "file_type": "code",
+      "source_file": "services/formatter.py",
+      "source_location": "L21",
+      "id": "services_formatter_table_messages",
+      "community": 3,
+      "norm_label": "_table_messages()"
+    },
+    {
+      "label": "format_result()",
+      "file_type": "code",
+      "source_file": "services/formatter.py",
+      "source_location": "L37",
+      "id": "services_formatter_format_result",
+      "community": 3,
+      "norm_label": "format_result()"
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "services/__init__.py",
+      "source_location": "L1",
+      "id": "services_init_py",
+      "community": 14,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "watchlist.py",
+      "file_type": "code",
+      "source_file": "services/watchlist.py",
+      "source_location": "L1",
+      "id": "services_watchlist_py",
+      "community": 2,
+      "norm_label": "watchlist.py"
+    },
+    {
+      "label": "add_ticker()",
+      "file_type": "code",
+      "source_file": "services/watchlist.py",
+      "source_location": "L7",
+      "id": "services_watchlist_add_ticker",
+      "community": 2,
+      "norm_label": "add_ticker()"
+    },
+    {
+      "label": "remove_ticker()",
+      "file_type": "code",
+      "source_file": "services/watchlist.py",
+      "source_location": "L17",
+      "id": "services_watchlist_remove_ticker",
+      "community": 2,
+      "norm_label": "remove_ticker()"
+    },
+    {
+      "label": "get_tickers()",
+      "file_type": "code",
+      "source_file": "services/watchlist.py",
+      "source_location": "L26",
+      "id": "services_watchlist_get_tickers",
+      "community": 2,
+      "norm_label": "get_tickers()"
+    },
+    {
+      "label": "fetch_all()",
+      "file_type": "code",
+      "source_file": "services/watchlist.py",
+      "source_location": "L33",
+      "id": "services_watchlist_fetch_all",
+      "community": 2,
+      "norm_label": "fetch_all()"
+    },
+    {
+      "label": "alpaca.py",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L1",
+      "id": "services_alpaca_py",
+      "community": 0,
+      "norm_label": "alpaca.py"
+    },
+    {
+      "label": "_parse_symbol()",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L17",
+      "id": "services_alpaca_parse_symbol",
+      "community": 0,
+      "norm_label": "_parse_symbol()"
+    },
+    {
+      "label": "_next_friday()",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L28",
+      "id": "services_alpaca_next_friday",
+      "community": 0,
+      "norm_label": "_next_friday()"
+    },
+    {
+      "label": "_get_current_price()",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L33",
+      "id": "services_alpaca_get_current_price",
+      "community": 0,
+      "norm_label": "_get_current_price()"
+    },
+    {
+      "label": "_fetch_puts()",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L39",
+      "id": "services_alpaca_fetch_puts",
+      "community": 0,
+      "norm_label": "_fetch_puts()"
+    },
+    {
+      "label": "fetch_puts_for_ticker()",
+      "file_type": "code",
+      "source_file": "services/alpaca.py",
+      "source_location": "L82",
+      "id": "services_alpaca_fetch_puts_for_ticker",
+      "community": 0,
+      "norm_label": "fetch_puts_for_ticker()"
+    },
+    {
+      "label": "main.py \u2014 Entry Point",
+      "file_type": "code",
+      "source_file": "main.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_main",
+      "community": 0,
+      "norm_label": "main.py \u2014 entry point"
+    },
+    {
+      "label": "Bot \u2014 Discord Client",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_bot",
+      "community": 0,
+      "norm_label": "bot \u2014 discord client"
+    },
+    {
+      "label": "Bot.on_ready \u2014 slash command sync",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_bot_on_ready",
+      "community": 6,
+      "norm_label": "bot.on_ready \u2014 slash command sync"
+    },
+    {
+      "label": "help_cmd \u2014 /help slash command",
+      "file_type": "code",
+      "source_file": "bot.py",
+      "source_location": "17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_bot_help_cmd",
+      "community": 15,
+      "norm_label": "help_cmd \u2014 /help slash command"
+    },
+    {
+      "label": "watchlist_group \u2014 /watchlist command group",
+      "file_type": "code",
+      "source_file": "commands/watchlist.py",
+      "source_location": "6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "commands_watchlist_watchlist_group",
+      "community": 4,
+      "norm_label": "watchlist_group \u2014 /watchlist command group"
+    },
+    {
+      "label": "premiums_group \u2014 /premiums command group",
+      "file_type": "code",
+      "source_file": "commands/premiums.py",
+      "source_location": "8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "commands_premiums_premiums_group",
+      "community": 4,
+      "norm_label": "premiums_group \u2014 /premiums command group"
+    },
+    {
+      "label": "MIN_PREMIUM_RATE \u2014 0.5% premium filter threshold",
+      "file_type": "rationale",
+      "source_file": "services/alpaca.py",
+      "source_location": "72",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "services_alpaca_min_premium_rate",
+      "community": 0,
+      "norm_label": "min_premium_rate \u2014 0.5% premium filter threshold"
+    },
+    {
+      "label": "MAX_ROWS_PER_MSG \u2014 Discord message chunk size (15 rows)",
+      "file_type": "rationale",
+      "source_file": "services/formatter.py",
+      "source_location": "3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "services_formatter_max_rows_per_msg",
+      "community": 3,
+      "norm_label": "max_rows_per_msg \u2014 discord message chunk size (15 rows)"
+    },
+    {
+      "label": "DB URL rewrite \u2014 postgresql:// to postgresql+psycopg:// for SQLAlchemy",
+      "file_type": "rationale",
+      "source_file": "migrations/env.py",
+      "source_location": "23",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "migrations_env_db_url_rewrite",
+      "community": 7,
+      "norm_label": "db url rewrite \u2014 postgresql:// to postgresql+psycopg:// for sqlalchemy"
+    },
+    {
+      "label": "Deploy to GCP \u2014 GitHub Actions workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/deploy.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "workflows_deploy_deploy_to_gcp",
+      "community": 10,
+      "norm_label": "deploy to gcp \u2014 github actions workflow"
+    },
+    {
+      "label": "docker-compose.yml \u2014 Dev Container services",
+      "file_type": "code",
+      "source_file": ".devcontainer/docker-compose.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "devcontainer_docker_compose_yml",
+      "community": 1,
+      "norm_label": "docker-compose.yml \u2014 dev container services"
+    },
+    {
+      "label": "README \u2014 Market Research Bot documentation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_readme",
+      "community": 6,
+      "norm_label": "readme \u2014 market research bot documentation"
+    },
+    {
+      "label": "CLAUDE.md \u2014 Claude Code project instructions",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "market_bot_claude_md",
+      "community": 6,
+      "norm_label": "claude.md \u2014 claude code project instructions"
+    },
+    {
+      "label": "Discord slash command sync strategy \u2014 guild sync for local, global for prod",
+      "file_type": "rationale",
+      "source_file": "bot.py",
+      "source_location": "31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_discord_command_sync_strategy",
+      "community": 6,
+      "norm_label": "discord slash command sync strategy \u2014 guild sync for local, global for prod"
+    },
+    {
+      "label": "Eastern timezone enforcement \u2014 critical for correct Friday expiry logic",
+      "file_type": "rationale",
+      "source_file": "main.py",
+      "source_location": "10",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_eastern_tz_friday_expiry",
+      "community": 0,
+      "norm_label": "eastern timezone enforcement \u2014 critical for correct friday expiry logic"
+    },
+    {
+      "label": "Alpaca indicative feed \u2014 estimated options data for research not execution",
+      "file_type": "rationale",
+      "source_file": "services/alpaca.py",
+      "source_location": "47",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_indicative_feed",
+      "community": 0,
+      "norm_label": "alpaca indicative feed \u2014 estimated options data for research not execution"
+    },
+    {
+      "label": "Strike range 20\u201330% below spot \u2014 deep OTM put selection strategy",
+      "file_type": "rationale",
+      "source_file": "services/alpaca.py",
+      "source_location": "45",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_strike_range_20_30pct",
+      "community": 0,
+      "norm_label": "strike range 20\u201330% below spot \u2014 deep otm put selection strategy"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "bot.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "bot_py",
+      "target": "market_bot_bot_bot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "bot.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "market_bot_bot_bot",
+      "target": "market_bot_bot_bot_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "bot.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "market_bot_bot_bot",
+      "target": "market_bot_bot_bot_on_ready",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "bot.py",
+      "source_location": "14",
+      "weight": 1.0,
+      "source": "market_bot_bot_bot",
+      "target": "commands_watchlist_watchlist_group"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "bot.py",
+      "source_location": "15",
+      "weight": 1.0,
+      "source": "market_bot_bot_bot",
+      "target": "commands_premiums_premiums_group"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "migrations/env.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "migrations_env_py",
+      "target": "migrations_env_run_migrations_offline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "migrations/env.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "migrations_env_py",
+      "target": "migrations_env_run_migrations_online",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "migrations/env.py",
+      "source_location": "23",
+      "weight": 1.0,
+      "source": "migrations_env_run_migrations_online",
+      "target": "migrations_env_db_url_rewrite"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "migrations_versions_333947cbfb58_create_tickers_table_py",
+      "target": "versions_333947cbfb58_create_tickers_table_upgrade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "migrations_versions_333947cbfb58_create_tickers_table_py",
+      "target": "versions_333947cbfb58_create_tickers_table_downgrade",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "versions_333947cbfb58_create_tickers_table_rationale_1",
+      "target": "migrations_versions_333947cbfb58_create_tickers_table_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "migrations/versions/333947cbfb58_create_tickers_table.py",
+      "source_location": "21",
+      "weight": 1.0,
+      "source": "versions_333947cbfb58_create_tickers_table_upgrade",
+      "target": "services_watchlist_add_ticker"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/setup.sh",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "deploy_setup_sh",
+      "target": "deploy_setup_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".github/workflows/deploy.yml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "deploy_setup_sh",
+      "target": "workflows_deploy_deploy_to_gcp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings_local_json",
+      "target": "claude_settings_local_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings_local_permissions",
+      "target": "claude_settings_local_permissions_allow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "models/options.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_options_py",
+      "target": "models_options_putoption",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "models/options.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "models_options_py",
+      "target": "models_options_optionsresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "models/options.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_options_putoption",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/alpaca.py",
+      "source_location": "60",
+      "weight": 1.0,
+      "source": "services_alpaca_fetch_puts",
+      "target": "models_options_putoption"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/formatter.py",
+      "source_location": "11",
+      "weight": 1.0,
+      "source": "services_formatter_format_row",
+      "target": "models_options_putoption"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "models/options.py",
+      "source_location": "21",
+      "weight": 1.0,
+      "source": "models_options_optionsresult",
+      "target": "models_options_putoption"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "models/options.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "models_options_optionsresult",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/alpaca.py",
+      "source_location": "90",
+      "weight": 1.0,
+      "source": "services_alpaca_fetch_puts_for_ticker",
+      "target": "models_options_optionsresult"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/formatter.py",
+      "source_location": "37",
+      "weight": 1.0,
+      "source": "services_formatter_format_result",
+      "target": "models_options_optionsresult"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_dockercomposefile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_workspacefolder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_postcreatecommand",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_remoteuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_devcontainer_customizations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "3",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_json",
+      "target": "devcontainer_docker_compose_yml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_customizations",
+      "target": "devcontainer_devcontainer_customizations_vscode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".devcontainer/devcontainer.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "devcontainer_devcontainer_customizations_vscode",
+      "target": "devcontainer_devcontainer_vscode_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "commands_watchlist_py",
+      "target": "commands_watchlist_watchlist_fetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "commands_watchlist_py",
+      "target": "commands_watchlist_watchlist_add",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/watchlist.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "commands_watchlist_py",
+      "target": "commands_watchlist_watchlist_remove",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/watchlist.py",
+      "source_location": "14",
+      "weight": 1.0,
+      "source": "commands_watchlist_watchlist_fetch",
+      "target": "services_watchlist_fetch_all"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/watchlist.py",
+      "source_location": "20",
+      "weight": 1.0,
+      "source": "commands_watchlist_watchlist_add",
+      "target": "services_watchlist_add_ticker"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/watchlist.py",
+      "source_location": "25",
+      "weight": 1.0,
+      "source": "commands_watchlist_watchlist_remove",
+      "target": "services_watchlist_remove_ticker"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/premiums.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "commands_premiums_py",
+      "target": "commands_premiums_send_result",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/premiums.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "commands_premiums_py",
+      "target": "commands_premiums_premiums_fetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/premiums.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "commands_premiums_py",
+      "target": "commands_premiums_premiums_stock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/premiums.py",
+      "source_location": "29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_premiums_premiums_fetch",
+      "target": "commands_premiums_send_result"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "commands/premiums.py",
+      "source_location": "36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_premiums_premiums_stock",
+      "target": "commands_premiums_send_result"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/premiums.py",
+      "source_location": "15",
+      "weight": 1.0,
+      "source": "commands_premiums_send_result",
+      "target": "services_alpaca_fetch_puts_for_ticker"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/premiums.py",
+      "source_location": "16",
+      "weight": 1.0,
+      "source": "commands_premiums_send_result",
+      "target": "services_formatter_format_result"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/premiums.py",
+      "source_location": "23",
+      "weight": 1.0,
+      "source": "commands_premiums_premiums_fetch",
+      "target": "services_watchlist_get_tickers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/formatter.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "services_formatter_py",
+      "target": "services_formatter_format_row",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/formatter.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "services_formatter_py",
+      "target": "services_formatter_table_messages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/formatter.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "services_formatter_py",
+      "target": "services_formatter_format_result",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/formatter.py",
+      "source_location": "32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_formatter_table_messages",
+      "target": "services_formatter_format_row"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/formatter.py",
+      "source_location": "49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_formatter_format_result",
+      "target": "services_formatter_table_messages"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/formatter.py",
+      "source_location": "26",
+      "weight": 1.0,
+      "source": "services_formatter_table_messages",
+      "target": "services_formatter_max_rows_per_msg"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/watchlist.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "services_watchlist_py",
+      "target": "services_watchlist_add_ticker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/watchlist.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "services_watchlist_py",
+      "target": "services_watchlist_remove_ticker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/watchlist.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "services_watchlist_py",
+      "target": "services_watchlist_get_tickers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/watchlist.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "services_watchlist_py",
+      "target": "services_watchlist_fetch_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/watchlist.py",
+      "source_location": "34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_watchlist_fetch_all",
+      "target": "services_watchlist_get_tickers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "services_alpaca_py",
+      "target": "services_alpaca_parse_symbol",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "services_alpaca_py",
+      "target": "services_alpaca_next_friday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "services_alpaca_py",
+      "target": "services_alpaca_get_current_price",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "services_alpaca_py",
+      "target": "services_alpaca_fetch_puts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "services_alpaca_py",
+      "target": "services_alpaca_fetch_puts_for_ticker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_alpaca_fetch_puts",
+      "target": "services_alpaca_parse_symbol"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_alpaca_fetch_puts_for_ticker",
+      "target": "services_alpaca_next_friday"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "main.py",
+      "source_location": "10",
+      "weight": 1.0,
+      "source": "concept_eastern_tz_friday_expiry",
+      "target": "services_alpaca_next_friday"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_alpaca_fetch_puts_for_ticker",
+      "target": "services_alpaca_get_current_price"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "services/alpaca.py",
+      "source_location": "93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_alpaca_fetch_puts_for_ticker",
+      "target": "services_alpaca_fetch_puts"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/alpaca.py",
+      "source_location": "72",
+      "weight": 1.0,
+      "source": "services_alpaca_fetch_puts",
+      "target": "services_alpaca_min_premium_rate"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/alpaca.py",
+      "source_location": "47",
+      "weight": 1.0,
+      "source": "services_alpaca_fetch_puts",
+      "target": "concept_indicative_feed"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services/alpaca.py",
+      "source_location": "45",
+      "weight": 1.0,
+      "source": "services_alpaca_fetch_puts",
+      "target": "concept_strike_range_20_30pct"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "main.py",
+      "source_location": "13",
+      "weight": 1.0,
+      "source": "market_bot_main",
+      "target": "market_bot_bot"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "main.py",
+      "source_location": "10",
+      "weight": 1.0,
+      "source": "market_bot_main",
+      "target": "concept_eastern_tz_friday_expiry"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "bot.py",
+      "source_location": "30",
+      "weight": 1.0,
+      "source": "market_bot_bot_on_ready",
+      "target": "concept_discord_command_sync_strategy"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "services/formatter.py",
+      "source_location": null,
+      "weight": 0.6,
+      "source": "services_formatter_max_rows_per_msg",
+      "target": "concept_indicative_feed"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "market_bot_readme",
+      "target": "market_bot_claude_md"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "concept_discord_command_sync_strategy",
+      "target": "market_bot_readme"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "premiums_request_flow",
+      "label": "Premiums request flow \u2014 Discord to Alpaca to Discord response",
+      "nodes": [
+        "commands_premiums_premiums_fetch",
+        "commands_premiums_send_result",
+        "services_alpaca_fetch_puts_for_ticker",
+        "services_formatter_format_result"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/premiums.py"
+    },
+    {
+      "id": "watchlist_crud_flow",
+      "label": "Watchlist CRUD \u2014 command layer to psycopg DB operations",
+      "nodes": [
+        "commands_watchlist_watchlist_add",
+        "commands_watchlist_watchlist_remove",
+        "commands_watchlist_watchlist_fetch",
+        "services_watchlist_add_ticker",
+        "services_watchlist_remove_ticker",
+        "services_watchlist_get_tickers"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "commands/watchlist.py"
+    },
+    {
+      "id": "deployment_pipeline",
+      "label": "Deployment pipeline \u2014 setup, GitHub Actions, systemd service",
+      "nodes": [
+        "deploy_setup_sh",
+        "workflows_deploy_deploy_to_gcp",
+        "devcontainer_devcontainer_json"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".github/workflows/deploy.yml"
+    }
+  ],
+  "built_at_commit": "694833575ae858693b5e701ba7b12fc596e99c44"
+}
