@@ -1,7 +1,7 @@
 [project]
 name = "market-bot"
 version = "0.1.0"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.16.5",
     "alpaca-py>=0.43.4",

@@ -5,7 +5,10 @@ from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 
-load_dotenv()
+if os.path.exists(".env.local"):
+    load_dotenv(".env.local")
+else:
+    load_dotenv()
 
 config = context.config
 

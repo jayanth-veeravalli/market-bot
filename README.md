@@ -13,27 +13,94 @@ A Discord bot for researching sell put premiums on watchlist stocks using the Al
 
 ## Prerequisites
 
-- Python 3.9+
-- `uv` package manager
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) — manages both Python and dependencies (no separate Python install needed)
 - [Alpaca account](https://alpaca.markets) (free, paper trading)
 - [Discord bot](https://discord.com/developers/applications) invited to your server
-- [Supabase](https://supabase.com) project (free tier is sufficient)
+- **Local only**: PostgreSQL 16 (`brew install postgresql@16`)
+- **Prod only**: [Supabase](https://supabase.com) project (free tier is sufficient)
 
-## Setup
+## Environments
 
-1. **Clone and install dependencies**
+The bot supports two environments controlled by the `ENV` variable:
+
+| | Local | Prod |
+|--|-------|------|
+| `ENV` | `local` | `prod` |
+| Config file | `.env.local` | `.env` |
+| Discord bot | Separate test bot | Production bot |
+| Discord server | Personal test server | Production server |
+| Command sync | Guild sync (instant) | Global sync (~1 hr) |
+| Database | Local PostgreSQL | Supabase |
+
+## Local Testing Setup
+
+1. **Clone, install Python, and install dependencies**
    ```bash
+   uv python install   # downloads Python 3.11 managed by uv
+   uv sync
+   ```
+
+2. **Create a test Discord bot**
+   - Go to [discord.com/developers/applications](https://discord.com/developers/applications) → New Application
+   - **Bot** tab → Add Bot → copy the Token
+   - **OAuth2 → URL Generator**: check scopes `bot` + `applications.commands`, permission `Send Messages`
+   - Open the generated URL → select your **test server** → Authorize
+
+3. **Get your test server ID**
+   - In Discord: Settings → Advanced → enable **Developer Mode**
+   - Right-click your test server name → **Copy Server ID**
+
+4. **Create `.env.local`** (copy from `.env.sample`)
+   ```
+   ENV=local
+   ALPACA_API_KEY=your_key
+   ALPACA_API_SECRET=your_secret
+   ALPACA_BASE_URL=https://paper-api.alpaca.markets/v2
+   DISCORD_BOT_TOKEN=your_test_bot_token
+   DISCORD_GUILD_ID=your_test_server_id
+   DATABASE_URL=postgresql://localhost/market_bot
+   ```
+
+5. **Install PostgreSQL and create local database**
+   ```bash
+   brew install postgresql@16
+   echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   brew services start postgresql@16
+   createdb market_bot
+   ```
+
+6. **Run migrations**
+   ```bash
+   uv run alembic upgrade head
+   ```
+
+7. **Run the bot**
+   ```bash
+   uv run python main.py
+   ```
+   You should see: `✅ Logged in as <TestBotName> — slash commands synced.`
+
+   Slash commands appear in your test server **instantly**.
+
+## Production Setup
+
+1. **Clone, install Python, and install dependencies**
+   ```bash
+   uv python install   # downloads Python 3.11 managed by uv
    uv sync
    ```
 
 2. **Fill in `.env`** (copy from `.env.sample`)
    ```
+   ENV=prod
    ALPACA_API_KEY=your_key
    ALPACA_API_SECRET=your_secret
    ALPACA_BASE_URL=https://paper-api.alpaca.markets/v2
-   DISCORD_BOT_TOKEN=your_bot_token
+   DISCORD_BOT_TOKEN=your_prod_bot_token
    DATABASE_URL=postgresql://postgres.[ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres
    ```
+   `DISCORD_GUILD_ID` is not needed for prod.
 
 3. **Run database migrations**
    ```bash
@@ -137,12 +204,14 @@ def downgrade() -> None:
     op.execute("DROP TABLE IF EXISTS tickers")
 ```
 
-## Discord Bot Setup (One-Time)
+## Discord Bot Setup (One-Time, Per Environment)
+
+Repeat for both your test bot (local) and prod bot:
 
 1. Go to [discord.com/developers/applications](https://discord.com/developers/applications) → New Application
-2. **Bot** tab → Add Bot → copy the Token → paste into `.env`
+2. **Bot** tab → Add Bot → copy the Token → paste into `.env.local` or `.env`
 3. **OAuth2 → URL Generator**: check scopes `bot` + `applications.commands`, permission `Send Messages`
-4. Open the generated URL in a browser → select your server → Authorize
+4. Open the generated URL in a browser → select the appropriate server → Authorize
 
 ## Commands
 
@@ -217,10 +286,11 @@ The `Deploy to GCP` workflow (`deploy.yml`) is triggered manually from the **Act
 | `GCP_SSH_PRIVATE_KEY` | Private SSH key for the VM |
 | `GCP_VM_HOST` | VM external IP |
 | `GCP_VM_USER` | SSH username |
+| `ENV` | Set to `prod` |
 | `ALPACA_API_KEY` | Alpaca API key |
 | `ALPACA_API_SECRET` | Alpaca API secret |
 | `ALPACA_BASE_URL` | Alpaca base URL |
-| `DISCORD_BOT_TOKEN` | Discord bot token |
+| `DISCORD_BOT_TOKEN` | Discord bot token (production bot) |
 | `DATABASE_URL` | Supabase PostgreSQL connection string |
 
 ## Project Structure
