@@ -1,0 +1,16 @@
+{
+  "name": "market-bot",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/market_bot",
+  "postCreateCommand": "uv sync && ([ -f .env.local ] || cp .env.sample .env.local) && sed -i 's|DATABASE_URL=DB_URL|DATABASE_URL=postgresql://postgres@db/market_bot|' .env.local && uv run alembic upgrade head",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  }
+}
