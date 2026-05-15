@@ -16,7 +16,8 @@ A Discord bot for researching sell put premiums on watchlist stocks using the Al
 - [`uv`](https://docs.astral.sh/uv/getting-started/installation/) — manages both Python and dependencies (no separate Python install needed)
 - [Alpaca account](https://alpaca.markets) (free, paper trading)
 - [Discord bot](https://discord.com/developers/applications) invited to your server
-- [Supabase](https://supabase.com) project (free tier is sufficient) — prod only; local uses a local PostgreSQL DB
+- **Local only**: PostgreSQL 16 (`brew install postgresql@16`)
+- **Prod only**: [Supabase](https://supabase.com) project (free tier is sufficient)
 
 ## Environments
 
@@ -60,13 +61,21 @@ The bot supports two environments controlled by the `ENV` variable:
    DATABASE_URL=postgresql://localhost/market_bot
    ```
 
-5. **Create local database and run migrations**
+5. **Install PostgreSQL and create local database**
    ```bash
+   brew install postgresql@16
+   echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   brew services start postgresql@16
    createdb market_bot
+   ```
+
+6. **Run migrations**
+   ```bash
    uv run alembic upgrade head
    ```
 
-6. **Run the bot**
+7. **Run the bot**
    ```bash
    uv run python main.py
    ```
