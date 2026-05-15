@@ -356,25 +356,47 @@ The `Deploy to GCP` workflow (`deploy.yml`) is triggered manually from the **Act
 | `DISCORD_BOT_TOKEN` | Discord bot token (production bot) |
 | `DATABASE_URL` | Supabase PostgreSQL connection string |
 
+## Architecture
+
+**`/premiums fetch` request flow:**
+
+```
+premiums_fetch()
+  └── get_tickers()              # load watchlist from PostgreSQL
+        └── fetch_puts_for_ticker()   # for each ticker
+              ├── _get_current_price()     # Alpaca IEX feed
+              └── _fetch_puts()            # Alpaca options chain (strikes 20–30% OTM)
+                    └── _parse_symbol()    # extract strike/expiry from OCC symbol
+        └── format_result()      # PutOption → table rows, chunked at 15 per message
+              └── _send_result() # send each chunk to Discord
+```
+
+Key design constraints baked into the flow:
+- **Eastern timezone** is set at process start (`main.py`) — required for correct Friday expiry cutoff logic
+- **Strike range**: 20–30% below spot, filtered to puts with effective premium ≥ 0.5% of strike
+- **Message chunking**: results split at 15 rows (`MAX_ROWS_PER_MSG`) to stay under Discord's 2,000-character limit
+- **Indicative feed**: Alpaca options data is estimated, not official OPRA — suitable for research only
+
 ## Project Structure
 
 ```
 market_bot/
-├── main.py                    # Entry point
-├── bot.py                     # Discord bot + /help command
+├── main.py                    # Entry point (sets TZ=America/New_York)
+├── bot.py                     # Discord bot setup + /help command
 ├── commands/
 │   ├── watchlist.py           # /watchlist commands
 │   └── premiums.py            # /premiums commands
 ├── services/
-│   ├── watchlist.py           # PostgreSQL watchlist CRUD
+│   ├── watchlist.py           # PostgreSQL watchlist CRUD (psycopg3 async)
 │   ├── alpaca.py              # Alpaca API integration + premium filter
 │   └── formatter.py           # Discord message formatting + chunking
 ├── models/
-│   └── options.py             # PutOption, OptionsResult models
+│   └── options.py             # PutOption, OptionsResult Pydantic models
 ├── migrations/                # Alembic migration versions
 ├── deploy/
 │   ├── setup.sh               # GCP VM first-time setup script
 │   └── market-bot.service     # systemd service unit file
-├── deploy.yml                 # GitHub Actions deploy workflow
+├── .github/workflows/
+│   └── deploy.yml             # GitHub Actions deploy workflow
 └── alembic.ini                # Alembic configuration
 ```
