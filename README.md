@@ -34,24 +34,66 @@ The bot supports two environments controlled by the `ENV` variable:
 
 ## Dev Container Setup (Recommended)
 
-The fastest way to get started — no local Python, PostgreSQL, or PATH setup needed.
+The fastest way to get started — no local Python, PostgreSQL, or PATH setup needed. Everything runs inside Docker.
 
-**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop) + [VS Code](https://code.visualstudio.com) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+### Prerequisites
 
-1. Open the repo in VS Code and click **Reopen in Container** when prompted (or run `Dev Containers: Reopen in Container` from the command palette)
-2. Wait for the container to build — `uv sync`, DB setup, and migrations run automatically
-3. Fill in your credentials in `.env.local` (created automatically from `.env.sample`):
+1. **Install [Docker Desktop](https://www.docker.com/products/docker-desktop)** and make sure it's running
+2. **Install [VS Code](https://code.visualstudio.com)**
+3. **Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)** in VS Code
+
+### First-Time Setup
+
+1. **Clone the repo and open it in VS Code**
+   ```bash
+   git clone https://github.com/jayanth-veeravalli/market-bot.git
+   code market-bot
+   ```
+
+2. **Reopen in container**
+   - VS Code will show a popup: **"Reopen in Container"** — click it
+   - Or open the command palette (`Cmd+Shift+P`) → **Dev Containers: Reopen in Container**
+
+3. **Wait for the build to complete**
+   The first build takes a few minutes. It will automatically:
+   - Build the Python 3.11 container
+   - Start a PostgreSQL 16 sidecar
+   - Run `uv sync` to install dependencies
+   - Create `.env.local` from `.env.sample`
+   - Set `DATABASE_URL` to point at the container's PostgreSQL
+   - Run Alembic migrations
+
+4. **Fill in your credentials** in `.env.local` (open it in the VS Code editor):
    ```
    ALPACA_API_KEY=your_key
    ALPACA_API_SECRET=your_secret
    DISCORD_BOT_TOKEN=your_test_bot_token
    DISCORD_GUILD_ID=your_test_server_id
    ```
-   `DATABASE_URL` is pre-filled to point at the container's PostgreSQL — no changes needed.
-4. Run the bot:
+   `ENV`, `DATABASE_URL` are pre-filled — leave them as-is.
+
+5. **Run the bot** in the VS Code terminal:
    ```bash
    uv run python main.py
    ```
+   You should see: `✅ Logged in as <TestBotName> — slash commands synced.`
+
+### Subsequent Runs
+
+Just reopen the repo in VS Code — Docker starts the containers automatically. Run:
+```bash
+uv run python main.py
+```
+
+### Rebuilding the Container
+
+If dependencies change (e.g. after a `git pull`), rebuild via:
+- Command palette → **Dev Containers: Rebuild Container**
+
+Or run inside the container terminal:
+```bash
+uv sync
+```
 
 ## Local Testing Setup (Manual)
 
